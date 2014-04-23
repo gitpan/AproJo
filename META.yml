@@ -40,12 +40,12 @@ requires:
   Mojolicious::Plugin::I18N: 0
   SQL::Translator: 0
   Term::Prompt: 0
-  perl: 5.008005
+  perl: 5.010001
 resources:
   bugtracker: https://github.com/wollmers/AproJo/issues
   homepage: https://github.com/wollmers/AproJo
   repository: https://github.com/wollmers/AproJo.git
-version: 0.001
+version: 0.002
 x_contributors:
   - 'Helmut Wollmersdorfer <helmut@wollmersdorfer.at>'
   - 'wollmers <helmut.wollmersdorfer@fixpunkt.de>'
