@@ -1,12 +1,9 @@
-Build
 Build.PL
 Changes
 LICENSE
 MANIFEST
 META.json
 META.yml
-MYMETA.json
-MYMETA.yml
 README
 aprojo.conf.mysql.example
 aprojo.conf.pg.example
