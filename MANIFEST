@@ -5,10 +5,11 @@ MANIFEST
 META.json
 META.yml
 README
+aprojo
 aprojo.conf.mysql.example
 aprojo.conf.pg.example
 aprojo.conf.sqlite.example
-bin/timerec
+bin/aprojo
 cpanfile
 dist.ini
 lib/AproJo.pm
@@ -55,9 +56,8 @@ lib/AproJo/I18N/de.pm
 lib/AproJo/I18N/en.pm
 lib/AproJo/Page.pm
 lib/AproJo/User.pm
-lib/MojoX/Form.pm
-lib/MojoX/Form/Field.pm
 lib/Mojolicious/Plugin/Form.pm
+lib/Mojolicious/Plugin/Form/Base.pm
 public/assets/bootstrap/css/bootstrap-responsive.min.css
 public/assets/bootstrap/css/bootstrap.min.css
 public/assets/bootstrap/img/glyphicons-halflings-white.png
@@ -882,9 +882,6 @@ t/release-pod-syntax.t
 t/xx_conditions.t
 templates/admin/change.html.ep
 templates/admin/show.html.ep
-templates/edit/edit_menu.html.ep
-templates/edit/edit_page.html.ep
-templates/edit/store_page_ajax.html.ep
 templates/front/index.html.ep
 templates/front/login.html.ep
 templates/front/macros/change.html.ep
@@ -896,8 +893,5 @@ templates/front/macros/show.html.ep
 templates/front/serverinfo.html.ep
 templates/header_common.html.ep
 templates/layouts/default.html.ep
-templates/layouts/standard.html.ep
 templates/nav_menu.html.ep
-templates/page/show.html.ep
 templates/user_menu.html.ep
-timerec

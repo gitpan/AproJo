@@ -45,7 +45,7 @@ resources:
   bugtracker: https://github.com/wollmers/AproJo/issues
   homepage: https://github.com/wollmers/AproJo
   repository: https://github.com/wollmers/AproJo.git
-version: 0.003
+version: 0.004
 x_contributors:
   - 'Helmut Wollmersdorfer <helmut@wollmersdorfer.at>'
   - 'wollmers <helmut.wollmersdorfer@fixpunkt.de>'
