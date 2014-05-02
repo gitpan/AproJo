@@ -1,11 +1,9 @@
 package AproJo;
 use Mojo::Base 'Mojolicious';
 
-use Mojolicious 4.96;
-
 use Data::Dumper;
 
-our $VERSION = '0.004';
+our $VERSION = '0.005';
 
 use File::Basename 'dirname';
 use File::Spec::Functions qw'rel2abs catdir';
