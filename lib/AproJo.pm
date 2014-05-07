@@ -3,7 +3,7 @@ use Mojo::Base 'Mojolicious';
 
 use Data::Dumper;
 
-our $VERSION = '0.005';
+our $VERSION = '0.006';
 
 use File::Basename 'dirname';
 use File::Spec::Functions qw'rel2abs catdir';
@@ -27,6 +27,8 @@ has db => sub {
   return $schema;
 };
 
+has app_debug => 1; 
+
 has home_path => sub {
   my $path = $ENV{MOJO_HOME} || getcwd;
   return File::Spec->rel2abs($path);
@@ -41,6 +43,7 @@ has config_file => sub {
 #return "$ENV{MOJO_HOME}/timerec.conf" if $ENV{MOJO_HOME};
 #return "$ENV{DOCUMENT_ROOT}/timerec.conf" if $ENV{DOCUMENT_ROOT};
 #return "/var/www/timerec/timerec.conf" if (-f "/var/www/timerec/timerec.conf");
+
 };
 
 sub startup {
@@ -65,10 +68,23 @@ sub startup {
   $app->plugin('I18N');
 
   $app->plugin('Mojolicious::Plugin::Form');
+  
+  {
+    # use content from directories under lib/AproJo/files or using File::ShareDir
+    my $lib_base = catdir(dirname(rel2abs(__FILE__)), '..', 'share','files');
+
+    my $public = catdir($lib_base, 'public');
+    $app->static->paths->[0] = -d $public ? $public : catdir(dist_dir('AproJo'), 'files','public');
+    my $static_path = $app->static->paths->[0];
+    print STDERR '$static_path: ',$static_path,"\n";
+
+    my $templates = catdir($lib_base, 'templates');
+    $app->renderer->paths->[0] = -d $templates ? $templates : catdir(dist_dir('AproJo'), 'files','templates');
+  }
 
   push @{$app->commands->namespaces}, 'AproJo::Command';
 
-  say STDERR 'namespaces: ', Dumper($app->commands->namespaces);
+  # say STDERR 'namespaces: ', Dumper($app->commands->namespaces);
 
   #DEPRECATED: $app->secret( $app->config->{secret} );
   $app->secrets([$app->config->{secret}]);
@@ -106,7 +122,7 @@ sub startup {
         $name = $self->session->{username};
       }
       return undef unless $name;
-      print STDERR 'get_user: ', $name, "\n";
+      say STDERR 'get_user: ', $name if $self->app->app_debug;
       return $self->schema->resultset('User')->single({name => $name});
     }
   );
@@ -115,9 +131,11 @@ sub startup {
       my $self = shift;
       my $user = $self->get_user(@_);
       return undef unless $user;
-      my $role = $user->role->name;
-      print STDERR 'is_admin: ', $role, "\n";
-      return $user->role->name eq 'admin';
+      # my $role = $user->role->name; 
+      my $role = $user->roles()->single({name => 'admin'});
+      # print STDERR 'is_admin: ', $role, "\n";
+      #return $user->role->name eq 'admin';
+      return ($role && $role->name eq 'admin');
     }
   );
 
@@ -210,7 +228,7 @@ The C<--force> option may be passed to overwrite any configuration file in the c
 
  $ aprojo setup
 
-This step is required. Run C<aprojo setup> to setup a database. It will use the default DBI settings (SQLite) or whatever is setup in the C<GALILEO_CONFIG> configuration file.
+This step is required. Run C<aprojo setup> to setup a database. It will use the default DBI settings (SQLite) or whatever is setup in the C<APROJO_CONFIG> configuration file.
 
 =head1 RUNNING THE APPLICATION
 
