@@ -55,8 +55,6 @@ lib/AproJo/Front.pm
 lib/AproJo/I18N/de.pm
 lib/AproJo/I18N/en.pm
 lib/AproJo/User.pm
-lib/Mojolicious/Plugin/Form.pm
-lib/Mojolicious/Plugin/Form/Base.pm
 script/aprojo
 share/files/public/img/favicon.ico
 share/files/public/index.html

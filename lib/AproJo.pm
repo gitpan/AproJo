@@ -3,7 +3,7 @@ use Mojo::Base 'Mojolicious';
 
 use Data::Dumper;
 
-our $VERSION = '0.006';
+our $VERSION = '0.008';
 
 use File::Basename 'dirname';
 use File::Spec::Functions qw'rel2abs catdir';
@@ -79,7 +79,7 @@ sub startup {
     print STDERR '$static_path: ',$static_path,"\n";
 
     my $templates = catdir($lib_base, 'templates');
-    $app->renderer->paths->[0] = -d $templates ? $templates : catdir(dist_dir('AproJo'), 'files','templates');
+    $app->renderer->paths->[0] = -d $templates ? $templates : catdir(dist_dir('AproJo'), 'files', 'templates');
   }
 
   push @{$app->commands->namespaces}, 'AproJo::Command';
